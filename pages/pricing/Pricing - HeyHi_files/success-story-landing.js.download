@@ -1,0 +1,78 @@
+let currentTranslateX2 = 0;
+const slideWrapper2 = document.getElementById('slider2');
+const slideContainer2 = document.getElementById('slider-container-2');
+const slideWidth2 = document.getElementById('story-box').offsetWidth;
+const maxTranslateX2 = slideWrapper2.scrollWidth - slideContainer2.offsetWidth;
+const dots = document.querySelectorAll('.dot-2');
+let currentDotIndex = 0;
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const storyBoxes = document.querySelectorAll(".story-box");
+
+  if (slideContainer2 && slideWrapper2 && storyBoxes.length >= 3) {
+    const thirdBox = storyBoxes[2];
+    const containerWidth = slideContainer2.clientWidth;
+    const boxWidth = thirdBox.clientWidth;
+    const boxLeft = thirdBox.offsetLeft;
+
+    currentTranslateX2 = boxLeft - (containerWidth / 2) + (boxWidth / 2);
+
+    slideWrapper2.style.transform = `translateX(-${currentTranslateX2}px)`;
+    currentDotIndex = 2;
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('bg-purple-500', index === currentDotIndex);
+      dot.classList.toggle('bg-gray-300', index !== currentDotIndex);
+    });
+  }
+});
+function move(direction) {
+  currentTranslateX2 += direction * slideWidth2;
+
+  if (currentTranslateX2 < 0) {
+    currentTranslateX2 = 0;
+    currentDotIndex = 0;
+  } else if (currentTranslateX2 > maxTranslateX2) {
+    currentTranslateX2 = maxTranslateX2;
+    currentDotIndex = dots.length - 1;
+  } else {
+    currentDotIndex += direction;
+  }
+
+  if(!(currentTranslateX2 == 0 && direction < 0))
+  {currentTranslateX2 += direction * 32;}
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('bg-purple-500', index === currentDotIndex);
+    dot.classList.toggle('bg-gray-300', index !== currentDotIndex);
+  });
+
+  slideWrapper2.style.transform = `translateX(-${currentTranslateX2}px)`;
+
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const storyBoxes = document.querySelectorAll(".story-box");
+  const dots = document.querySelectorAll(".dot-mobile");
+
+  const observerOptions = {
+    root: document.querySelector("#slider-container-2"),
+    rootMargin: "0px",
+    threshold: 0.5
+  };
+
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      const index = Array.from(storyBoxes).indexOf(entry.target);
+
+      if (entry.isIntersecting) {
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("bg-purple-500", i === index);
+          dot.classList.toggle("bg-gray-300", i !== index);
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  storyBoxes.forEach((storyBox) => observer.observe(storyBox));
+});

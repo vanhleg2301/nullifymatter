@@ -1,0 +1,90 @@
+<section
+	class="pricing-cards-container"
+	data-component="pricing-cards"
+	data-src="/data/pricing_cards.json"
+	style="background-color: #ecfdff">
+	<p class="title-40 mb-6" id="pc-title"></p>
+	<p class="description-2" id="pc-sub" style="color: #3d3d3d"></p>
+
+	<div
+		id="pc-slider"
+		class="mt-6 lg:mt-16 flex gap-4 xl:gap-2 overflow-scroll"></div>
+
+	<div class="flex space-x-4 justify-center mt-12 xl:hidden">
+		<span class="dot w-4 h-4 rounded-full disable-button-color"></span>
+		<span class="dot w-4 h-4 rounded-full disable-button-color"></span>
+		<span class="dot w-4 h-4 rounded-full disable-button-color"></span>
+		<span class="dot w-4 h-4 rounded-full active-button-color"></span>
+	</div>
+</section>
+
+<script type="module">
+	(() => {
+		const root = document.currentScript.previousElementSibling;
+		const src = root?.dataset.src || "/data/pricing_cards.json";
+		const ICON_TICK = "/pages/pricing/Pricing%20-%20HeyHi_files/tick.svg";
+
+		const h = (html) => html.trim();
+
+		function cardHTML(p) {
+			const badge = p.badge
+				? h`
+      <div class="badge-container ml-4" style="background-color:#ecfdff;height:fit-content">
+        <span style="color:#0d719a">${p.badge}</span>
+      </div>`
+				: "";
+
+			const bullets = (p.bullets || [])
+				.map(
+					(b) => h`
+      <p class="flex span-2">
+        <img style="width:20px;height:28px;margin-right:8px" src="${ICON_TICK}">
+        ${b}
+      </p>`,
+				)
+				.join("");
+
+			return h`
+    <div class="pricing-card-2 gap-5 md:gap-7 w-full md:w-1/2 xl:w-1/4 flex-shrink-0 ${
+			p.highlight ? "pricing-card--border" : ""
+		}">
+      <div class="flex flex-col md:gap-7" style="min-height:420px">
+        <div class="flex items-center">${
+					p.title ? `<p class="title-1">${p.title}</p>` : ""
+				}${badge}</div>
+        <p class="span-1">${p.subtitle || ""}</p>
+        <div>
+          <p class="span-1-semibold">Perfect for</p>
+          <p class="span-1">${p.perfect_for || ""}</p>
+        </div>
+        ${
+					p.price
+						? `<p><span class="price-large">${p.price}</span><span class="span-1">/ month</span></p>`
+						: ""
+				}
+      </div>
+
+      ${
+				p.cta_url
+					? `<a href="${p.cta_url}" class="button-full-width py-2">${
+							p.cta_text || "Get Started"
+					  }</a>`
+					: ""
+			}
+      <div class="flex flex-col gap-4">${bullets}</div>
+    </div>`;
+		}
+
+		fetch(src, { cache: "no-cache" })
+			.then((r) => r.json())
+			.then((data) => {
+				document.getElementById("pc-title").textContent = data.title || "";
+				const sub = document.getElementById("pc-sub");
+				sub.textContent = data.subtitle || "";
+				document.getElementById("pc-slider").innerHTML = (data.plans || [])
+					.map(cardHTML)
+					.join("");
+			})
+			.catch((e) => console.error("pricing-cards json error:", e));
+	})();
+</script>

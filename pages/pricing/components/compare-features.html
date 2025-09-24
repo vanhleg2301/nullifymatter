@@ -1,0 +1,172 @@
+<section
+	class="compare-feature-container"
+	data-component="compare-features"
+	data-src="/data/pricing_compare.json">
+	<div class="flex lg:hidden mb-4">
+		<div class="w-1/2 md:ml-4">
+			<div class="mb-4 w-fit">
+				<div class="relative">
+					<select
+						id="cf-select"
+						class="block w-full rounded-md pl-4 pr-6 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 appearance-none"
+						style="height: 40px"></select>
+					<span
+						class="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+						<img src="/pages/pricing/Pricing%20-%20HeyHi_files/dropdown.svg" />
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="w-1/2 flex justify-end md:justify-center">
+			<a
+				id="cf-mobile-cta"
+				class="button-outline-nobg"
+				style="padding: 4px 8px; font-size: 14px; height: 40px"
+				>Get Started</a
+			>
+		</div>
+	</div>
+
+	<table class="table-auto w-full" id="cf-table"></table>
+</section>
+
+<script type="module">
+	(() => {
+		const root = document.currentScript.previousElementSibling;
+		const src = root?.dataset.src || "/data/pricing_compare.json";
+		const ICON_TICK = "/pages/pricing/Pricing%20-%20HeyHi_files/blue-tick.svg";
+		const ICON_NOT =
+			"/pages/pricing/Pricing%20-%20HeyHi_files/blue-not-tick.svg";
+
+		const el = (tag, attrs = {}, html = "") => {
+			const n = document.createElement(tag);
+			Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+			n.innerHTML = html;
+			return n;
+		};
+
+		function cellValue(v) {
+			if (v === "tick") return `<img src="${ICON_TICK}">`;
+			if (v === "notick") return `<img src="${ICON_NOT}">`;
+			return v ?? "";
+		}
+
+		fetch(src, { cache: "no-cache" })
+			.then((r) => r.json())
+			.then((data) => {
+				// mobile select
+				const sel = root.querySelector("#cf-select");
+				data.plans.forEach((p) => {
+					const opt = el(
+						"option",
+						{ value: p.id },
+						`${p.label} - ${p.price || ""}`,
+					);
+					sel.appendChild(opt);
+				});
+				const mobileCTA = root.querySelector("#cf-mobile-cta");
+				const setMobile = (id) => {
+					const p = data.plans.find((x) => x.id === id) || data.plans[0];
+					mobileCTA.textContent = p.cta_text || "Get Started";
+					mobileCTA.href = p.cta_url || "#";
+				};
+				setMobile(data.plans[0].id);
+				sel.addEventListener("change", () => setMobile(sel.value));
+
+				// table build
+				const tbl = root.querySelector("#cf-table");
+				const thead = el("thead");
+				const headRow = el("tr");
+
+				// first header cell
+				headRow.appendChild(
+					el(
+						"th",
+						{
+							class:
+								"border-b-2 border-gray-300 quicksand-24 px-4 lg:table-cell hidden",
+							style: "color:#3d3d3d;padding-bottom:130px",
+						},
+						`<div style="max-width:300px;text-align:left">Compare plans & features</div>`,
+					),
+				);
+
+				// per-plan headers
+				data.plans.forEach((p) => {
+					headRow.appendChild(
+						el(
+							"th",
+							{ class: "border-b-2 border-gray-300 px-4 hidden lg:table-cell" },
+							`<div class="flex flex-col gap-4 items-start lg:mb-20">
+           <p class="quicksand-20">${p.label}</p>
+           <p class="description-14">${p.price_label || ""}</p>
+           <a href="${
+							p.cta_url || "#"
+						}" class="button-outline-nobg" style="padding:4px 8px;font-size:14px">
+             ${p.cta_text || "Get Started"}
+           </a>
+         </div>`,
+						),
+					);
+				});
+				thead.appendChild(headRow);
+				tbl.appendChild(thead);
+
+				const tbody = el("tbody");
+
+				data.groups.forEach((g, gi) => {
+					// group title row
+					tbody.appendChild(
+						el(
+							"tr",
+							"",
+							`<td class="px-0 md:px-4 py-2 description-2" style="font-weight:600;color:#3d3d3d">${
+								g.title
+							}</td>
+         ${data.plans
+						.map(
+							() => '<td class="px-0 md:px-4 py-2 hidden lg:table-cell"></td>',
+						)
+						.join("")}
+        `,
+						),
+					);
+
+					// feature rows
+					g.rows.forEach((r) => {
+						const tr = el("tr");
+						tr.appendChild(
+							el(
+								"td",
+								{
+									class:
+										"px-0 md:px-4 lg:pl-10 py-2 description-16--3d3d3d-color",
+								},
+								`<p class="dotted-text">${r.label}</p>`,
+							),
+						);
+						data.plans.forEach((p) => {
+							tr.appendChild(
+								el(
+									"td",
+									{
+										class:
+											"px-0 flex justify-center lg:justify-start md:px-4 py-2 description-16--primary-color hidden lg:table-cell",
+										"data-column": p.id,
+									},
+									cellValue(r.values[p.id]),
+								),
+							);
+						});
+						tbody.appendChild(tr);
+					});
+
+					// spacer
+					tbody.appendChild(el("tr", { style: "height:26px" }));
+				});
+
+				tbl.appendChild(tbody);
+			})
+			.catch((e) => console.error("compare-features json error:", e));
+	})();
+</script>

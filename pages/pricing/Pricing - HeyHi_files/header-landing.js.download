@@ -1,0 +1,67 @@
+const solutionButton = document.getElementById('solution-button');
+const solutionButton2 = document.getElementById('solution-button-2');
+const solutionMenu = document.getElementById('solution-menu');
+const solutionMenu2 = document.getElementById('solution-menu-2');
+let openSolutionMenu = false;
+
+solutionButton.addEventListener('click', () => {
+  const icon = solutionButton.querySelector('img');
+  openSolutionMenu = !openSolutionMenu;
+  if(openSolutionMenu) {
+    solutionMenu.classList.remove('hidden');
+    icon.classList.add('rotate-180');
+  } else {
+    solutionMenu.classList.add('hidden');
+    icon.classList.remove('rotate-180');
+  }
+});
+
+
+solutionButton2.addEventListener('click', () => {
+  const icon = solutionButton2.querySelector('img');
+  openSolutionMenu = !openSolutionMenu;
+  if(openSolutionMenu) {
+    solutionMenu2.classList.remove('hidden');
+    icon.classList.add('rotate-180');
+  } else {
+    solutionMenu2.classList.add('hidden');
+    icon.classList.remove('rotate-180');
+  }
+});
+
+const menuButton = document.getElementById('menu-button');
+const menu = document.getElementById('menu');
+const closeMenuButton = document.getElementById('close-menu');
+
+menuButton.addEventListener('click', () => {
+  menu.classList.remove('hidden');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  menu.classList.add('hidden');
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const buttons = document.querySelectorAll('.nav-button-header');
+  const path = window.location.pathname;
+
+  if (path.includes('/solution')) {
+    document.querySelector('[data-target="solution"]').classList.add('active-button');
+  } else if (path.includes('/pricing')) {
+    document.querySelector('[data-target="pricing"]').classList.add('active-button');
+  } else if (path.includes('/about-us')) {
+    document.querySelector('[data-target="aboutUs"]').classList.add('active-button');
+  } else if (path.includes('/contact-us')) {
+    document.querySelector('[data-target="contactUs"]').classList.add('active-button');
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function () {
+      buttons.forEach(btn => btn.classList.remove('active-button'));
+
+      this.classList.add('active-button');
+
+    });
+  });
+});
+

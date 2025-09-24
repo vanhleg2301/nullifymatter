@@ -1,0 +1,74 @@
+<!-- các asset của header; loader sẽ đưa lên <head> -->
+<link rel="preconnect" href="https://fonts.googleapis.com" data-head />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-head />
+
+<!-- Nếu file CSS này là chung toàn site -> KHÔNG scope (để nguyên data-head) -->
+<!-- <link rel="stylesheet" href="/resources/styles.min.css" data-head> -->
+
+<!-- Nếu chỉ muốn hiệu lực trong header -> dùng data-scope=".nm-header" -->
+<link
+	rel="stylesheet"
+	href="/resources/styles-override.css"
+	data-head
+	data-scope=".nm-header" />
+<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+	data-head
+	data-scope=".nm-header" />
+
+<!-- CSS nhỏ chỉ cho header (namespaced) -->
+<style data-head></style>
+
+<!-- /partials/header.html -->
+<div class="nm-header">
+	<div class="nav-wrapper">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container no-nav-padding ultra-expanded-width">
+				<a class="navbar-brand d-lg-none" href="/">
+					<img class="logo" src="/resources/logo1.jpg" alt="Nullify Matter" />
+				</a>
+
+				<button
+					class="navbar-toggler collapsed"
+					type="button"
+					data-bs-toggle="offcanvas"
+					data-bs-target="#navbarOffcanvasLg"
+					aria-controls="navbarOffcanvasLg">
+					<div class="hamburger-toggle">
+						<div class="hamburger"><span></span><span></span><span></span></div>
+					</div>
+				</button>
+
+				<div
+					class="offcanvas offcanvas-end"
+					tabindex="-1"
+					id="navbarOffcanvasLg">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="offcanvas"
+							aria-label="Close"></button>
+					</div>
+
+					<ul class="navbar-nav mx-4 mx-lg-auto mb-2 mb-lg-0">
+						<li><a class="nav-link light-blue" href="/">Home</a></li>
+						<li class="nav-item">
+							<a class="nav-link" href="/pages/pricing/pricing.html">Pricing</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/pages/portfolio.html">Portfolio</a>
+						</li>
+						<li>
+							<a class="nav-link light-blue" href="/pages/contact-us.html"
+								>Contact</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
