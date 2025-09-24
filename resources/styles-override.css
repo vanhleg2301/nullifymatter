@@ -1,0 +1,7 @@
+.intro {
+  position: relative;
+  z-index: 1;
+  background: #f0eeee;
+  background-image:none !important;
+  background-size: auto;
+}

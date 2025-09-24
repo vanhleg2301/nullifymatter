@@ -1,0 +1,89 @@
+{
+    "icons": {
+        "tick": "./pages/pricing/Pricing - HeyHi_files/tick.svg",
+        "tickBlue": "./pages/pricing/Pricing - HeyHi_files/blue-tick.svg",
+        "notTickBlue": "./pages/pricing/Pricing - HeyHi_files/blue-not-tick.svg",
+        "dropdown": "./pages/pricing/Pricing - HeyHi_files/dropdown.svg"
+    },
+    "plans": [
+        {
+            "id": "launch_package",
+            "name": "Launch Package",
+            "summary": "",
+            "perfectFor": "",
+            "price": {
+                "currency": "SGD",
+                "amount": 399,
+                "unit": "/ year"
+            },
+            "cta": {
+                "label": "Get Started",
+                "href": "https://www.heyhi.sg/user/signup"
+            },
+            "pages": "4 pages",
+            "featuresCard": [
+                "SEO-friendly Architecture",
+                "Mobile & tablet optimization",
+                "Website Hosting",
+                "Premium theme or light custom design"
+            ]
+        },
+        {
+            "id": "growth_package",
+            "name": "Growth Package",
+            "summary": "",
+            "perfectFor": "",
+            "price": {
+                "currency": "SGD",
+                "amount": 599,
+                "unit": "/ year"
+            },
+            "cta": {
+                "label": "Get Started",
+                "href": "https://www.heyhi.sg/user/signup"
+            },
+            "featuresCardHeading": "",
+            "pages": "6 pages",
+            "featuresCard": [
+                "SEO-friendly Architecture",
+                "Mobile & tablet optimization",
+                "Website Hosting",
+                "Premium theme or light custom design",
+                "On-page SEO optimization",
+                "Blog setup / Content management system (CMS)",
+                "Social media & WhatsApp integration"
+            ]
+        },
+        {
+            "id": "scale_package",
+            "name": "Scale Package",
+            "badge": {
+                "label": "",
+                "bg": "#ecfdff",
+                "color": "#0d719a"
+            },
+            "summary": "",
+            "perfectFor": "",
+            "price": {
+                "currency": "SGD",
+                "amount": 899,
+                "unit": "/ year"
+            },
+            "cta": {
+                "label": "Get Started",
+                "href": "https://www.heyhi.sg/user/signup"
+            },
+            "featuresCardHeading": "",
+            "pages": "10 pages",
+            "featuresCard": [
+                "SEO-friendly Architecture",
+                "Mobile & tablet optimization",
+                "Website Hosting",
+                "Premium theme or light custom design",
+                "On-page SEO optimization",
+                "Blog setup / Content management system (CMS)",
+                "Social media & WhatsApp integration"
+            ]
+        }
+    ]
+}
