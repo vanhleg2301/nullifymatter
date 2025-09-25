@@ -70,17 +70,29 @@
 			as="style"
 			onload="this.onload=null;this.rel=&#39;stylesheet&#39;" />
 		<noscript>
-			<link rel="stylesheet" href="/assets/css/lightbox.min.css" />
+			<link
+				rel="stylesheet"
+				href="https://nullifymatter.netlify.app/assets/css/lightbox.min.css" />
 		</noscript>
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="https://nullifymatter.netlify.app/apple-touch-icon.png" />
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="/images/favicon/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+			href="https://nullifymatter.netlify.app/images/favicon/favicon-32x32.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="https://nullifymatter.netlify.app/favicon-16x16.png" />
 		<!-- <link rel="manifest" href="/site.webmanifest"> -->
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#64c4b7" />
+		<link
+			rel="mask-icon"
+			href="https://nullifymatter.netlify.app/safari-pinned-tab.svg"
+			color="#64c4b7" />
 
 		<link
 			rel="stylesheet"
@@ -5296,7 +5308,10 @@
 						bis_skin_checked="1">
 						<h2 class="display-4">Easy To Use<br />Hard To Break</h2>
 
-						<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+						<ul
+							class="nav nav-pills mb-3 justify-content-start"
+							id="pills-tab"
+							role="tablist">
 							<li class="nav-item" role="presentation">
 								<button
 									class="nav-link active"
@@ -5616,7 +5631,7 @@
 						"
 						bis_skin_checked="1">
 						<div class="text-center" bis_skin_checked="1">
-							<h2 class="display-4">
+							<h2 class="display-4 pt-4">
 								<span>Price Package</span>
 								<hr />
 							</h2>
@@ -5631,7 +5646,90 @@
 						class="row w-100"
 						data-src="/data/pricing.json"></div>
 
-					<script type="module" src="/components/pricing-cards.js"></script>
+					<!-- <script type="module" src="/components/pricing-cards.js"></script> -->
+
+					<script
+						src="https://nullifymatter.netlify.app/components/pricing-cards.js"
+						defer></script>
+
+					<script type="application/json" id="pricing-data">
+						{
+							"icons": {
+								"tickBlue": "https://uploads-ssl.webflow.com/…/blue-tick.svg",
+								"tick": "https://uploads-ssl.webflow.com/…/tick.svg",
+								"notTickBlue": "https://uploads-ssl.webflow.com/…/blue-not-tick.svg",
+								"dropdown": "https://uploads-ssl.webflow.com/…/dropdown.svg"
+							},
+							"plans": [
+								{
+									"id": "launch_package",
+									"name": "Launch Package",
+									"price": {
+										"currency": "SGD",
+										"amount": 399,
+										"unit": "/year"
+									},
+									"cta": {
+										"label": "Get Started",
+										"href": "https://calendly.com/alex-nullifymatter/30min"
+									},
+									"pages": "4 pages",
+									"featuresCard": [
+										"SEO-friendly Architecture",
+										"Mobile & tablet optimization",
+										"Website Hosting",
+										"Premium theme or light custom design"
+									]
+								},
+								{
+									"id": "growth_package",
+									"name": "Growth Package",
+									"price": {
+										"currency": "SGD",
+										"amount": 599,
+										"unit": "/year"
+									},
+									"cta": {
+										"label": "Get Started",
+										"href": "https://calendly.com/alex-nullifymatter/30min"
+									},
+									"pages": "6 pages",
+									"featuresCard": [
+										"SEO-friendly Architecture",
+										"Mobile & tablet optimization",
+										"Website Hosting",
+										"Premium theme or light custom design",
+										"On-page SEO optimization",
+										"Blog setup / CMS",
+										"Social media & WhatsApp integration"
+									]
+								},
+								{
+									"id": "scale_package",
+									"name": "Scale Package",
+									"price": {
+										"currency": "SGD",
+										"amount": 899,
+										"unit": "/year"
+									},
+									"cta": {
+										"label": "Get Started",
+										"href": "https://calendly.com/alex-nullifymatter/30min"
+									},
+									"pages": "10 pages",
+									"featuresCard": [
+										"SEO-friendly Architecture",
+										"Mobile & tablet optimization",
+										"Website Hosting",
+										"Premium theme or light custom design",
+										"On-page SEO optimization",
+										"Blog setup / CMS",
+										"Social media & WhatsApp integration"
+									]
+								}
+							]
+						}
+					</script>
 				</div>
 			</div>
 		</section>
@@ -6122,10 +6220,10 @@
 			bis_skin_checked="1"></div>
 
 		<!-- Vendor libs -->
-		<script src="./assets/js/jquery.min.js"></script>
-		<script src="./assets/js/bootstrap.bundle.min.js"></script>
-		<script src="./assets/js/tiny-slider.min.js"></script>
-		<script src="./assets/js/wow.min.js"></script>
+		<script src="https://nullifymatter.netlify.app/assets/js/jquery.min.js"></script>
+		<script src="https://nullifymatter.netlify.app/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="https://nullifymatter.netlify.app/assets/js/tiny-slider.min.js"></script>
+		<script src="https://nullifymatter.netlify.app/assets/js/wow.min.js"></script>
 		<script>
 			window.fbq = window.fbq || function () {};
 
